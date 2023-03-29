@@ -68,7 +68,7 @@ export class AppComponent {
 
   constructor() {
     const batchMap = this.offset.pipe(
-      throttleTime(500),
+      throttleTime(100),
       mergeMap((n) => this.getBatch(n)),
       scan((acc, batch: any) => {
         return { ...acc, ...batch };
@@ -159,10 +159,9 @@ export class AppComponent {
     if (this.theEnd) {
       return;
     }
-
     const end = this.viewport.getRenderedRange().end;
     const total = this.viewport.getDataLength();
-    // console.log(`${end}, '>=', ${total}`);
+    console.log(`${end}, '>=', ${total}`);
     if (end === total) {
       this.offset.next(offset);
     }
