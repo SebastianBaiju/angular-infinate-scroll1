@@ -21,22 +21,24 @@ export class AppComponent {
   constructor() {
     const batchMap = this.offset.pipe(
       throttleTime(500),
-      mergeMap(n => this.getBatch(n)),
-      scan((acc, batch:any) => {
+      mergeMap((n) => this.getBatch(n)),
+      scan((acc, batch: any) => {
         return { ...acc, ...batch };
       }, {})
     );
 
-    this.infinite = batchMap.pipe(map(v => Object.values(v)));
+    this.infinite = batchMap.pipe(map((v) => Object.values(v)));
   }
 
   getBatch(offset) {
-    console.log(offset);
-    return of( [{
-      emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
-      name: 'sdsfsf',
-      bio : 'dedede'
-     }])
+    console.log(offset, 'ded');
+    return of([
+      {
+        emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+        name: 'sdsfsf',
+        bio: 'dedede',
+      },
+    ]);
     // return this.db
     //   .collection('people', ref =>
     //     ref
@@ -58,6 +60,7 @@ export class AppComponent {
   }
 
   nextBatch(e, offset) {
+    console.log(offset, 'ded');
     if (this.theEnd) {
       return;
     }
