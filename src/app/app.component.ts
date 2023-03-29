@@ -32,11 +32,11 @@ export class AppComponent {
 
   getBatch(offset) {
     console.log(offset);
-    return of( {
+    return of( [{
       emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
       name: 'sdsfsf',
       bio : 'dedede'
-     })
+     }])
     // return this.db
     //   .collection('people', ref =>
     //     ref
