@@ -14,6 +14,54 @@ export class AppComponent {
 
   batch = 20;
   theEnd = false;
+  public data = [
+    {
+      emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+      name: 'sdsfsf',
+      bio: 'dedede',
+    },
+    {
+      emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+      name: 'sdsfsf',
+      bio: 'dedede',
+    },
+    {
+      emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+      name: 'sdsfsf',
+      bio: 'dedede',
+    },
+    {
+      emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+      name: 'sdsfsf',
+      bio: 'dedede',
+    },
+    {
+      emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+      name: 'sdsfsf',
+      bio: 'dedede',
+    },
+    {
+      emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+      name: 'sdsfsf',
+      bio: 'dedede',
+    },
+    {
+      emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+      name: 'sdsfsf',
+      bio: 'dedede',
+    },
+    {
+      emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+      name: 'sdsfsf',
+      bio: 'dedede',
+    },
+
+    {
+      emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+      name: 'sdsfsf',
+      bio: 'dedede',
+    },
+  ];
 
   offset = new BehaviorSubject(null);
   infinite: Observable<any[]>;
@@ -32,13 +80,62 @@ export class AppComponent {
 
   getBatch(offset) {
     console.log(offset, 'ded');
-    return of([
+    const data = [
       {
         emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
         name: 'sdsfsf',
         bio: 'dedede',
       },
-    ]);
+      {
+        emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+        name: 'sdsfsf',
+        bio: 'dedede',
+      },
+      {
+        emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+        name: 'sdsfsf',
+        bio: 'dedede',
+      },
+      {
+        emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+        name: 'sdsfsf',
+        bio: 'dedede',
+      },
+      {
+        emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+        name: 'sdsfsf',
+        bio: 'dedede',
+      },
+      {
+        emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+        name: 'sdsfsf',
+        bio: 'dedede',
+      },
+      {
+        emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+        name: 'sdsfsf',
+        bio: 'dedede',
+      },
+      {
+        emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+        name: 'sdsfsf',
+        bio: 'dedede',
+      },
+
+      {
+        emoji: 'https://static.npmjs.com/255a118f56f5346b97e56325a1217a16.svg',
+        name: 'sdsfsf',
+        bio: 'dedede',
+      },
+    ];
+    this.data.push(...data);
+    return of(this.data).pipe(
+      tap((arr) => (arr.length ? null : (this.theEnd = true))),
+      map((arr) => {
+        console.log(arr);
+        return arr;
+      })
+    );
     // return this.db
     //   .collection('people', ref =>
     //     ref
@@ -60,14 +157,13 @@ export class AppComponent {
   }
 
   nextBatch(e, offset) {
-    console.log(offset, 'ded');
     if (this.theEnd) {
       return;
     }
 
     const end = this.viewport.getRenderedRange().end;
     const total = this.viewport.getDataLength();
-    console.log(`${end}, '>=', ${total}`);
+    // console.log(`${end}, '>=', ${total}`);
     if (end === total) {
       this.offset.next(offset);
     }
