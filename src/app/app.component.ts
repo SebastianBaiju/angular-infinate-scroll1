@@ -68,7 +68,6 @@ export class AppComponent {
 
   constructor() {
     const batchMap = this.offset.pipe(
-      throttleTime(100),
       mergeMap((n) => this.getBatch(n)),
       scan((acc, batch: any) => {
         return { ...acc, ...batch };
