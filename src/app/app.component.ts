@@ -132,7 +132,6 @@ export class AppComponent {
     return of(this.data).pipe(
       tap((arr) => (arr.length ? null : (this.theEnd = true))),
       map((arr) => {
-        console.log(arr);
         return arr;
       })
     );
