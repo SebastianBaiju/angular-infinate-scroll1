@@ -1,31 +1,24 @@
-<h1>Angular 14: Drag & Drop with a flex-wrap</h1>
-
-<button (click)="add()">Add</button> <button (click)="shuffle()">Shuffle</button
-><br />
-<ul class="example-list">
-  <li *ngFor="let item of items">{{ item }}</li>
-</ul>
-
-<div #dropListContainer class="example-container" cdkDropListGroup>
-  <!-- <div cdkDropList class='example-box'    [cdkDropListEnterPredicate]="dropListEnterPredicate"></div> -->
-  <div
-    *ngFor="let item of items; let i = index"
-    cdkDropList
-    [cdkDropListOrientation]="'horizontal'"
-    [cdkDropListData]="i"
-    (mouseover)="mouseEnter($event, i)"
-    [cdkDropListEnterPredicate]="dropListEnterPredicate"
+<ng-container *ngIf="infinite | async as people">
+  <cdk-virtual-scroll-viewport
+    itemSize="100"
+    (scrolledIndexChange)="nextBatch($event, people[people.length - 1].name)"
   >
-    <div
-      cdkDrag
-      [cdkDragData]="i"
-      (cdkDragStarted)="cdkDragStarted($event)"
-      (cdkDragDropped)="dragDropped($event)"
-      (cdkDragReleased)="cdkDragReleased($event)"
-      class="example-box"
+    <li
+      *cdkVirtualFor="let p of people; let i = index; trackBy: trackByIdx"
+      class="animated lightSpeedIn"
     >
-      <!-- <div *cdkDragPlaceholder></div> -->
-      {{ item }}
-    </div>
-  </div>
-</div>
+      <h2>{{ i }}. {{ p.emoji }} {{ p.name }}</h2>
+      <p>{{ p.bio }}</p>
+    </li>
+
+    <iframe
+      *ngIf="theEnd"
+      src="https://giphy.com/embed/lD76yTC5zxZPG"
+      width="480"
+      height="352"
+      frameBorder="0"
+      class="giphy-embed"
+      allowFullScreen
+    ></iframe>
+  </cdk-virtual-scroll-viewport>
+</ng-container>
